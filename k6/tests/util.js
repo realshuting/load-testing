@@ -1,3 +1,44 @@
+export const generateGateway = (name = 'test') => {
+  return {
+    kind: 'Gateway',
+    apiVersion: 'networking.istio.io/v1beta1',
+    metadata: {
+      name: name,
+    },
+    spec: {
+      selector: {
+        istio: 'ingressgateway'
+      },
+      servers: [
+        {
+          port: {
+            number: 80,
+            name: 'http',
+            protocol: 'HTTP'
+          },
+          hosts: [
+            'ac56639a1b.example.com'
+          ]
+        },
+        {
+          port: {
+            number: 443,
+            name: 'https',
+            protocol: 'HTTPs'
+          },
+          hosts: [
+            '34k32kg43.example.com'
+          ],
+          "tls": {
+            "mode": "SIMPLE",
+            "credentialName": "my-tls-secret"
+          }
+        }
+      ]
+    }
+  }
+}
+
 export const generatePod = (name = 'test', image = 'nginx') => {
   return {
     kind: 'Pod',
