@@ -14,7 +14,9 @@ SCRIPT="$1"
 RATE="$2"
 DURATION="$3"
 
-sed -i "s/duration: '30s',/duration: $DURATION,/; s/rate: 30,/rate: $RATE/" $SCRIPT
+TEMP_SCRIPT_PATH="/tmp/script.js"
+
+sed -i "s/duration: '30s',/duration: $DURATION,/; s/rate: 30,/rate: $RATE/" $SCRIPT > $TEMP_SCRIPT_PATH
 
 echo "Deploying namespace..."
 kubectl create ns "$NAMESPACE"
@@ -27,7 +29,7 @@ kubectl apply -n "$NAMESPACE" -f rbac.yaml
 SCRIPT_DIR=$(mktemp -d)
 NEW_SCRIPT_PATH="${SCRIPT_DIR}/script.js"
 
-cp "$SCRIPT" "$NEW_SCRIPT_PATH"
+cp "$TEMP_SCRIPT_PATH" "$NEW_SCRIPT_PATH"
 
 echo "Creating configmap..."
 kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" --from-file="$NEW_SCRIPT_PATH" --from-literal="vus=0" --from-literal="iterations=0"
