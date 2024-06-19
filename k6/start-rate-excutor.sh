@@ -14,11 +14,6 @@ SCRIPT="$1"
 RATE="$2"
 DURATION="$3"
 
-if [[ $ITERATIONS -lt $VUS ]]; then
-	echo "iterations must be greater or equal to vus" 1>&2
-	exit 1
-fi
-
 sed -i "s/duration: '30s',/duration: $DURATION,/; s/rate: 30,/rate: $RATE/" $SCRIPT
 
 echo "Deploying namespace..."
