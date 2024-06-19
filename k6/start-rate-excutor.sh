@@ -32,7 +32,7 @@ NEW_SCRIPT_PATH="${SCRIPT_DIR}/script.js"
 cp "$TEMP_SCRIPT_PATH" "$NEW_SCRIPT_PATH"
 
 echo "Creating configmap..."
-kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" --from-file="$NEW_SCRIPT_PATH" --from-literal="vus=50" --from-literal="iterations=50"
+kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" --from-file="$NEW_SCRIPT_PATH"
 
 rm -rf "$SCRIPT_DIR"
 
@@ -53,7 +53,7 @@ EXIT_CODE=$(kubectl get pods -n "$NAMESPACE" "$POD_NAME" -o jsonpath='{.status.c
 echo "Job exit code: $EXIT_CODE"
 
 echo "Extracting logs and summary..."
-kubectl logs -n "$NAMESPACE" jobs/load-test > "$(basename "$SCRIPT")-${VUS}vu-${ITERATIONS}it-logs.txt"
+kubectl logs -n "$NAMESPACE" jobs/load-test > "$(basename "$SCRIPT")-${RATE}-${DURATION}-logs.txt"
 
 echo "Clean up job and configmap..."
 kubectl delete -n "$NAMESPACE" jobs load-test
