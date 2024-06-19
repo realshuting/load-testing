@@ -13,7 +13,7 @@ spec:
       - action: Ignore
         onPodConditions:
           - type: DisruptionTarget
-            status: true
+            status: "true"
   template:
     spec:
       serviceAccountName: load-test
