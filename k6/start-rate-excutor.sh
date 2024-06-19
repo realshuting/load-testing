@@ -37,7 +37,7 @@ kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" -
 rm -rf "$SCRIPT_DIR"
 
 echo "Deploying k6 job..."
-kubectl apply -n "$NAMESPACE" -f job.yaml
+kubectl apply -n "$NAMESPACE" -f job-rate-executor.yaml
 
 echo "Waiting for the job to finish..."
 kubectl wait -n $NAMESPACE --for=condition=complete --timeout=600s jobs/load-test &
