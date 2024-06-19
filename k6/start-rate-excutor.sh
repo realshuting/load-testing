@@ -16,7 +16,7 @@ DURATION="$3"
 
 TEMP_SCRIPT_PATH="/tmp/script.js"
 
-sed -i "s/duration: '30s',/duration: $DURATION,/; s/rate: 30,/rate: $RATE/" $SCRIPT > $TEMP_SCRIPT_PATH
+sed -e "s/duration: '30s',/duration: $DURATION,/; s/rate: 30,/rate: $RATE,/" $SCRIPT > $TEMP_SCRIPT_PATH
 
 echo "Deploying namespace..."
 kubectl create ns "$NAMESPACE"
