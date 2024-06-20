@@ -37,6 +37,7 @@ export default function () {
   console.log('checking configmap "test" ...', labelValue);
   console.log('generated configmap', JSON.stringify(cm));
   if (checkConfigmapRes.status === 200) {
+    params.headers['Content-Type'] = 'application/strategic-merge-patch+json'
     const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
     check(res, { 'verify response code is 200': r => r.status === 200 });
     console.log('response: ', res);
