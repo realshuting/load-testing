@@ -34,7 +34,6 @@ export const generateConfigmap = (name = 'test', value = 'bar') => {
     apiVersion: "v1",
     metadata: {
       name: name,
-      namespace: 'load-tests',
       labels: {
         foo: value
       },
