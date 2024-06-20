@@ -42,8 +42,4 @@ export default function () {
     const createRes = http.post(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps`, JSON.stringify(cm), params);
     check(createRes, { 'verify response code is 201': r => r.status === 201 });
   }
-
-  check(res, {
-    'verify response code is 201': r => r.status === 201
-  })
 }
