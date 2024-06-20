@@ -40,9 +40,9 @@ echo "Deploying k6 job..."
 kubectl apply -n "$NAMESPACE" -f rate-excutor/job-rate-executor.yaml
 
 echo "Waiting for the job to finish..."
-kubectl wait -n $NAMESPACE --for=condition=complete --timeout=$DURATION jobs/load-test &
+kubectl wait -n $NAMESPACE --for=condition=complete --timeout=600s jobs/load-test &
 COMPLETE_PID=$!
-kubectl wait -n $NAMESPACE --for=condition=failed --timeout=$DURATION jobs/load-test &
+kubectl wait -n $NAMESPACE --for=condition=failed --timeout=600s jobs/load-test &
 FAILED_PID=$!
 wait -n $COMPLETE_PID $FAILED_PID
 kill $COMPLETE_PID $FAILED_PID 2> /dev/null || true
