@@ -32,7 +32,7 @@ NEW_SCRIPT_PATH="${SCRIPT_DIR}/script.js"
 cp "$TEMP_SCRIPT_PATH" "$NEW_SCRIPT_PATH"
 
 echo "Creating configmap..."
-kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" --from-file="$NEW_SCRIPT_PATH"
+kubectl create configmap -n "$NAMESPACE" load-test --from-file="../tests/util.js" --from-file="$NEW_SCRIPT_PATH"
 
 rm -rf "$SCRIPT_DIR"
 
