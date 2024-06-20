@@ -34,16 +34,13 @@ export default function () {
   params.headers['Content-Type'] = 'application/json';
 
   const checkConfigmapRes = http.get(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, params);
-  console.log('checking configmap "test" ...', labelValue);
-  console.log('generated configmap', JSON.stringify(cm));
+
   if (checkConfigmapRes.status === 200) {
     params.headers['Content-Type'] = 'application/strategic-merge-patch+json'
     const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
     check(res, { 'verify response code is 200': r => r.status === 200 });
-    console.log('response: ', res);
   } else {
     const createRes = http.post(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps`, JSON.stringify(cm), params);
     check(createRes, { 'verify response code is 201': r => r.status === 201 });
-    console.log('Configmap "test" created successfully.');
   }
 }
