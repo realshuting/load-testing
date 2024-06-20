@@ -27,13 +27,13 @@ const baseUrl = buildKubernetesBaseUrl();
 const namespace = getTestNamespace();
 
 export default function () {
-  const cmName = `test-${randomString(8)}`;
-  const cm = generateConfigmap(cmName);
+  const labelValue = `test-${randomString(8)}`;
+  const cm = generateConfigmap('test', labelValue);
 
   const params = getParamsWithAuth();
   params.headers['Content-Type'] = 'application/json';
 
-  const res = http.post(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps`, JSON.stringify(cm), params);
+  const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
   check(res, {
     'verify response code is 201': r => r.status === 201
   })

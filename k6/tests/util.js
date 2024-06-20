@@ -28,12 +28,15 @@ export const generatePod = (name = 'test', image = 'nginx') => {
   }
 }
 
-export const generateConfigmap = (name = 'test') => {
+export const generateConfigmap = (name = 'test', value = 'bar') => {
   return {
     kind: "ConfigMap",
     apiVersion: "v1",
     metadata: {
-      name: name
+      name: name,
+      labels: {
+        foo: value
+      },
     }
   }
 }
