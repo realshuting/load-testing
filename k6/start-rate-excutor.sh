@@ -22,7 +22,7 @@ echo "Deploying namespace..."
 kubectl create ns "$NAMESPACE"
 
 echo "Deploying RBAC..."
-kubectl apply -n "$NAMESPACE" -f ../rbac.yaml
+kubectl apply -n "$NAMESPACE" -f rbac.yaml
 
 # copy the script to a temp file under a common name
 # so that we can reference always to the same name in the pod
@@ -37,7 +37,7 @@ kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" -
 rm -rf "$SCRIPT_DIR"
 
 echo "Deploying k6 job..."
-kubectl apply -n "$NAMESPACE" -f ../job-rate-executor.yaml
+kubectl apply -n "$NAMESPACE" -f rate-excutor/job-rate-executor.yaml
 
 echo "Waiting for the job to finish..."
 kubectl wait -n $NAMESPACE --for=condition=complete --timeout=$DURATION jobs/load-test &
