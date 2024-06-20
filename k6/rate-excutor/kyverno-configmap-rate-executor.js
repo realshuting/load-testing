@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check } from 'k6';
-import { buildKubernetesBaseUrl, generateConfigmap, getParamsWithAuth, getTestNamespace, randomString } from '../tests/util.js';
+import { buildKubernetesBaseUrl, generateConfigmap, getParamsWithAuth, getTestNamespace, randomString } from './util.js';
 
 export const options = {
   discardResponseBodies: true,
