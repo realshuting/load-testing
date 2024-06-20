@@ -35,7 +35,7 @@ export default function () {
 
   const checkConfigmapRes = http.get(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, params);
   console.log('checking configmap "test" ...', labelValue);
-
+  console.log('generated configmap', JSON.stringify(cm));
   if (checkConfigmapRes.status === 200) {
     const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
     check(res, { 'verify response code is 201': r => r.status === 201 });
