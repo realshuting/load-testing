@@ -1,3 +1,5 @@
+## Constant Rate Executor
+
 This test executes K6 [constant-arrival-rate executor](https://grafana.com/docs/k6/latest/using-k6/scenarios/executors/constant-arrival-rate/#constant-arrival-rate).
 
 To execute the test, go to `load-testing/k6` dir:
