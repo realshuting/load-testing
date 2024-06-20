@@ -32,12 +32,12 @@ NEW_SCRIPT_PATH="${SCRIPT_DIR}/script.js"
 cp "$TEMP_SCRIPT_PATH" "$NEW_SCRIPT_PATH"
 
 echo "Creating configmap..."
-kubectl create configmap -n "$NAMESPACE" load-test --from-file="../tests/util.js" --from-file="$NEW_SCRIPT_PATH"
+kubectl create configmap -n "$NAMESPACE" load-test --from-file="tests/util.js" --from-file="$NEW_SCRIPT_PATH"
 
 rm -rf "$SCRIPT_DIR"
 
 echo "Deploying k6 job..."
-kubectl apply -n "$NAMESPACE" -f job-rate-executor.yaml
+kubectl apply -n "$NAMESPACE" -f ../job-rate-executor.yaml
 
 echo "Waiting for the job to finish..."
 kubectl wait -n $NAMESPACE --for=condition=complete --timeout=$DURATION jobs/load-test &
