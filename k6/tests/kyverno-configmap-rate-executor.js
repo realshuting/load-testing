@@ -38,7 +38,7 @@ export default function () {
   console.log('generated configmap', JSON.stringify(cm));
   if (checkConfigmapRes.status === 200) {
     const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
-    check(res, { 'verify response code is 201': r => r.status === 201 });
+    check(res, { 'verify response code is 200': r => r.status === 200 });
     console.log('Configmap "test" updated successfully.');
   } else {
     const createRes = http.post(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps`, JSON.stringify(cm), params);
