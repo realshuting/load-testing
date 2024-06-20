@@ -37,6 +37,9 @@ export const generateConfigmap = (name = 'test', value = 'bar') => {
       labels: {
         foo: value
       },
+    },
+    data: {
+      foo: value
     }
   }
 }
