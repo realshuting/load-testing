@@ -34,7 +34,7 @@ export default function () {
   params.headers['Content-Type'] = 'application/json';
 
   const checkConfigmapRes = http.get(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, params);
-  console.log('checking configmap "test" ...');
+  console.log('checking configmap "test" ...', labelValue);
 
   if (checkConfigmapRes.status === 200) {
     const res = http.patch(`${baseUrl}/api/v1/namespaces/${namespace}/configmaps/test`, JSON.stringify(cm), params);
